@@ -19,8 +19,7 @@ class TennisGame():
       return self.spokenScore(self.getPlayerOneScore()) + "-" + self.spokenScore(self.getPlayerTwoScore()) 
 
   def isAdvantage(self):
-    return (
-      self.getPlayerOneScore() >= 3 and self.getPlayerTwoScore() >= 3 and 
+    return (self.getPlayerOneScore() >= 3 and self.getPlayerTwoScore() >= 3 and 
       self.getPlayerOneScore() != self.getPlayerTwoScore() and
       abs(self.getPlayerOneScore() - self.getPlayerTwoScore()) == 1)
   
