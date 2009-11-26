@@ -43,6 +43,39 @@ class TestTennisGame(unittest.TestCase):
     self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
     assertEquals("forty-love", self.g.announceScore())
 
+  def testThatPlayerOneWinsGameAfterFourPoints(self):
+    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    assertEquals("game player one", self.g.announceScore())
+
+  def testThatPlayerOneGetsAdvantage(self):
+    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    self.g.scorePlayerTwo(); self.g.scorePlayerTwo(); self.g.scorePlayerTwo()
+    self.g.scorePlayerOne()
+    assertEquals("advantage player one", self.g.announceScore())
+
+  def testThatPlayerTwoWinsAfterDeuce(self):
+    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    self.g.scorePlayerTwo(); self.g.scorePlayerTwo(); self.g.scorePlayerTwo()
+    self.g.scorePlayerTwo(); self.g.scorePlayerTwo()
+    assertEquals("game player two", self.g.announceScore())
+
+  def testThatPlayerTwoGetsAdvantage(self):
+    self.scorePlayerTwo(3)
+    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    self.g.scorePlayerTwo()
+    assertEquals("advantage player two", self.g.announceScore())
+
+  def testThatPlayerOneGetsAdvantageAfterPlayerOneGetsAdvantage(self):
+    pass
+  
+  def scorePlayerOne(self, times):
+    for each in range(times):
+      self.g.scorePlayerOne()
+
+  def scorePlayerTwo(self, times):
+    for each in range(times):
+      self.g.scorePlayerTwo() 
+
 #### infrastructure
 
 def assertEquals(o1, o2):
