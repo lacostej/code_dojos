@@ -33,7 +33,8 @@ class TennisGame():
     return self.isPlayerWin(self.PLAYER_ONE, self.PLAYER_TWO)
 
   def isPlayerWin(self, playerA, playerB):
-    return self.getPlayerScore(playerA) >= 4 and self.getPlayerScore(playerA) - self.getPlayerScore(playerB) > 1
+    return (self.getPlayerScore(playerA) >= 4 and 
+      self.getPlayerScore(playerA) - self.getPlayerScore(playerB) > 1)
 
   def getLeader(self):
     if self.getPlayerOneScore() > self.getPlayerTwoScore(): return "player one"
