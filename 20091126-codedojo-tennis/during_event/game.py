@@ -5,7 +5,6 @@ class TennisGame():
 
   def __init__(self):
     self.scores = [0, 0]
-    self.printScores()
 
   def announceScore(self):
     if self.isWin():
@@ -20,9 +19,10 @@ class TennisGame():
       return self.spokenScore(self.getPlayerOneScore()) + "-" + self.spokenScore(self.getPlayerTwoScore()) 
 
   def isAdvantage(self):
-    return (not self.isWin() and 
+    return (
       self.getPlayerOneScore() >= 3 and self.getPlayerTwoScore() >= 3 and 
-      self.getPlayerOneScore() != self.getPlayerTwoScore())
+      self.getPlayerOneScore() != self.getPlayerTwoScore() and
+      abs(self.getPlayerOneScore() - self.getPlayerTwoScore()) == 1)
   
   def isWin(self):
     return self.isPlayerTwoWin() or self.isPlayerOneWin()
