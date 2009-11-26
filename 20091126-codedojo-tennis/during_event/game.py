@@ -1,6 +1,7 @@
 class TennisGame():
   PLAYER_ONE = 0
   PLAYER_TWO = 1
+  SPOKEN_SCORES = ["love", "fifteen", "thirty", "forty"]
 
   def __init__(self):
     self.scores = [0, 0]
@@ -46,10 +47,7 @@ class TennisGame():
     return self.isAll() and self.getPlayerTwoScore() >= 3
 
   def spokenScore(self, score):
-    if score == 0: return "love"
-    if score == 1: return "fifteen"
-    if score == 2: return "thirty"
-    if score == 3: return "forty"
+    return self.SPOKEN_SCORES[score]
 
   def getPlayerOneScore(self):
     return self.getPlayerScore(self.PLAYER_ONE)
