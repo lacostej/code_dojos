@@ -27,10 +27,13 @@ class TennisGame():
     return self.isPlayerTwoWin() or self.isPlayerOneWin()
 
   def isPlayerTwoWin(self):
-    return self.getPlayerTwoScore() >= 4 and self.getPlayerTwoScore() - self.getPlayerOneScore() > 1
+    return self.isPlayerWin(self.PLAYER_TWO, self.PLAYER_ONE)
 
   def isPlayerOneWin(self):
-    return self.getPlayerOneScore() >= 4 and self.getPlayerOneScore() - self.getPlayerTwoScore() > 1
+    return self.isPlayerWin(self.PLAYER_ONE, self.PLAYER_TWO)
+
+  def isPlayerWin(self, playerA, playerB):
+    return self.getPlayerScore(playerA) >= 4 and self.getPlayerScore(playerA) - self.getPlayerScore(playerB) > 1
 
   def getLeader(self):
     if self.getPlayerOneScore() > self.getPlayerTwoScore(): return "player one"
@@ -49,10 +52,13 @@ class TennisGame():
     if score == 3: return "forty"
 
   def getPlayerOneScore(self):
-    return self.scores[self.PLAYER_ONE]
+    return self.getPlayerScore(self.PLAYER_ONE)
 
   def getPlayerTwoScore(self):
-    return self.scores[self.PLAYER_TWO]
+    return self.getPlayerScore(self.PLAYER_TWO)
+
+  def getPlayerScore(self, player):
+    return self.scores[player]
 
   def scorePlayerOne(self):
     self.scores[self.PLAYER_ONE] += 1
