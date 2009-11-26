@@ -10,63 +10,65 @@ class TestTennisGame(unittest.TestCase):
     assertEquals("love-all", self.g.announceScore())
 
   def testThatSinglePointIsAnnounced(self):
-    self.g.scorePlayerOne()
+    self.scorePlayerOne(1)
     assertEquals("fifteen-love", self.g.announceScore())
 
   def testThatSecondPointIsAnnounced(self):
-    self.g.scorePlayerOne()
-    self.g.scorePlayerOne()
+    self.scorePlayerOne(2)
     assertEquals("thirty-love", self.g.announceScore())
 
   def testThatPlayerTwoCanScore(self):
-    self.g.scorePlayerTwo()
-    self.g.scorePlayerTwo()
+    self.scorePlayerTwo(2)
     assertEquals("love-thirty", self.g.announceScore())
 
   def testThatBothPlayersScoreTwice(self):
-    self.g.scorePlayerOne()
-    self.g.scorePlayerOne()
-    self.g.scorePlayerTwo()
-    self.g.scorePlayerTwo()
+    self.scorePlayerOne(2)
+    self.scorePlayerTwo(2)
     assertEquals("thirty-all", self.g.announceScore())
     
   def testThatDeuceIsAnnounced(self):
-    self.g.scorePlayerOne()
-    self.g.scorePlayerOne()
-    self.g.scorePlayerOne()
-    self.g.scorePlayerTwo()
-    self.g.scorePlayerTwo()
-    self.g.scorePlayerTwo()
+    self.scorePlayerOne(3)
+    self.scorePlayerTwo(3)
     assertEquals("deuce", self.g.announceScore())
 
   def testThatPlayersCanScoreThrice(self):
-    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    self.scorePlayerOne(3)
     assertEquals("forty-love", self.g.announceScore())
 
   def testThatPlayerOneWinsGameAfterFourPoints(self):
-    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    self.scorePlayerOne(4)
     assertEquals("game player one", self.g.announceScore())
 
   def testThatPlayerOneGetsAdvantage(self):
-    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
-    self.g.scorePlayerTwo(); self.g.scorePlayerTwo(); self.g.scorePlayerTwo()
-    self.g.scorePlayerOne()
+    self.scorePlayerOne(3)
+    self.scorePlayerTwo(3)
+    self.scorePlayerOne(1)
     assertEquals("advantage player one", self.g.announceScore())
 
   def testThatPlayerTwoWinsAfterDeuce(self):
-    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
-    self.g.scorePlayerTwo(); self.g.scorePlayerTwo(); self.g.scorePlayerTwo()
-    self.g.scorePlayerTwo(); self.g.scorePlayerTwo()
+    self.scorePlayerOne(3)
+    self.scorePlayerTwo(5)
     assertEquals("game player two", self.g.announceScore())
 
   def testThatPlayerTwoGetsAdvantage(self):
     self.scorePlayerTwo(3)
-    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
-    self.g.scorePlayerTwo()
+    self.scorePlayerOne(3)
+    self.scorePlayerTwo(1)
     assertEquals("advantage player two", self.g.announceScore())
 
-  def testThatPlayerOneGetsAdvantageAfterPlayerOneGetsAdvantage(self):
-    pass
+  def testThatPlayerTwoGetsAdvantageAfterPlayerOneGetsAdvantage(self):
+    self.scorePlayerTwo(3)
+    self.scorePlayerOne(4)
+    self.scorePlayerTwo(2)
+    assertEquals("advantage player two", self.g.announceScore())
+
+  def testThatSecondDeuceIsAnnounced(self):
+    self.scorePlayerTwo(3)
+    self.scorePlayerOne(4)
+    self.scorePlayerTwo(2)
+    self.scorePlayerOne(1)
+    assertEquals("deuce", self.g.announceScore())
+ 
   
   def scorePlayerOne(self, times):
     for each in range(times):

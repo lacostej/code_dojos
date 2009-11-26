@@ -16,8 +16,9 @@ class TennisGame():
       return self.spokenScore(self.playerOneScore) + "-" + self.spokenScore(self.playerTwoScore) 
 
   def isAdvantage(self):
-    return ((self.playerOneScore == 4 and self.playerTwoScore == 3) or
-      (self.playerTwoScore == 4 and self.playerOneScore == 3))
+    return (not self.isWin() and 
+      self.playerOneScore >= 3 and self.playerTwoScore >= 3 and 
+      self.playerOneScore != self.playerTwoScore)
   
   def isWin(self):
     return self.isPlayerTwoWin() or self.isPlayerOneWin()
@@ -36,7 +37,7 @@ class TennisGame():
     return self.playerOneScore == self.playerTwoScore
 
   def isDeuce(self):
-    return self.isAll() and self.playerTwoScore == 3
+    return self.isAll() and self.playerTwoScore >= 3
 
   def spokenScore(self, score):
     if score == 0: return "love"
