@@ -18,6 +18,31 @@ class TestTennisGame(unittest.TestCase):
     self.g.scorePlayerOne()
     assertEquals("thirty-love", self.g.announceScore())
 
+  def testThatPlayerTwoCanScore(self):
+    self.g.scorePlayerTwo()
+    self.g.scorePlayerTwo()
+    assertEquals("love-thirty", self.g.announceScore())
+
+  def testThatBothPlayersScoreTwice(self):
+    self.g.scorePlayerOne()
+    self.g.scorePlayerOne()
+    self.g.scorePlayerTwo()
+    self.g.scorePlayerTwo()
+    assertEquals("thirty-all", self.g.announceScore())
+    
+  def testThatDeuceIsAnnounced(self):
+    self.g.scorePlayerOne()
+    self.g.scorePlayerOne()
+    self.g.scorePlayerOne()
+    self.g.scorePlayerTwo()
+    self.g.scorePlayerTwo()
+    self.g.scorePlayerTwo()
+    assertEquals("deuce", self.g.announceScore())
+
+  def testThatPlayersCanScoreThrice(self):
+    self.g.scorePlayerOne(); self.g.scorePlayerOne(); self.g.scorePlayerOne()
+    assertEquals("forty-love", self.g.announceScore())
+
 #### infrastructure
 
 def assertEquals(o1, o2):
